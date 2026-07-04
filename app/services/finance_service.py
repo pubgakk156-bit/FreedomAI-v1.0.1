@@ -18,3 +18,11 @@ class FinanceService:
     @staticmethod
     def get_history(user_id: int):
         return FinanceRepository.get_history(user_id)
+
+    @staticmethod
+    def get_transaction(transaction_id: int):
+        return FinanceRepository.get_transaction(transaction_id)
+
+    @staticmethod
+    def update_amount(transaction_id: int, amount: int):
+        return FinanceRepository.update_amount(transaction_id, amount)
