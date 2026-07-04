@@ -5,3 +5,4 @@ from aiogram.fsm.state import StatesGroup
 class FinanceState(StatesGroup):
 
     waiting_income = State()
+    waiting_expense_amount = State()

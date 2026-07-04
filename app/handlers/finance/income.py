@@ -46,8 +46,13 @@ async def income_save(
         amount=amount
     )
 
+    balance = FinanceService.get_balance(user_id)
+
     await state.clear()
 
     await message.answer(
-        f"✅ Доход {amount:,} ₽ успешно сохранён.".replace(",", " ")
+        (
+            f"✅ Доход {amount:,} ₽ успешно сохранён.\n\n"
+            f"💰 Баланс: {balance:,} ₽"
+        ).replace(",", " ")
     )

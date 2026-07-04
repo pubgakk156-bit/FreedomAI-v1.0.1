@@ -4,11 +4,13 @@ from app.repositories.finance_repository import FinanceRepository
 class FinanceService:
 
     @staticmethod
-    def add_income(
-        user_id: int,
-        amount: int
-    ):
-        FinanceRepository.add_income(
-            user_id=user_id,
-            amount=amount
-        )
+    def add_income(user_id: int, amount: int):
+        FinanceRepository.add_income(user_id, amount)
+
+    @staticmethod
+    def add_expense(user_id: int, amount: int):
+        FinanceRepository.add_expense(user_id, amount)
+
+    @staticmethod
+    def get_balance(user_id: int):
+        return FinanceRepository.get_balance(user_id)
