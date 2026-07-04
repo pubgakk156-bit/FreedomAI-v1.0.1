@@ -16,5 +16,5 @@ class FinanceService:
         return FinanceRepository.get_balance(user_id)
 
     @staticmethod
-    def get_history(user_id: int, limit: int = 10):
-        return FinanceRepository.get_history(user_id, limit)
+    def get_history(user_id: int):
+        return FinanceRepository.get_history(user_id)

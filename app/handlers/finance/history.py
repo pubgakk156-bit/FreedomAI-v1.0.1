@@ -10,20 +10,32 @@ router = Router()
 @router.message(F.text == "📜 История")
 async def history(message: Message):
 
-    user_id = UserService.get_or_create_user(message.from_user)
+    user_id = UserService.get_or_create_user(
+        message.from_user
+    )
 
-    rows = FinanceService.get_history(user_id)
+    history = FinanceService.get_history(user_id)
 
-    if not rows:
-        await message.answer("📭 История пуста")
+    if not history:
+        await message.answer(
+            "📭 История пока пуста."
+        )
         return
 
-    text = "📜 Последние операции:\n\n"
+    text = "📜 Последние операции\n\n"
 
-    for t, amount, date in rows:
+    for transaction_id, type_, amount, created_at in history:
 
-        icon = "➕" if t == "income" else "➖"
+        icon = "➕" if type_ == "income" else "➖"
 
-        text += f"{icon} {amount} ₽ | {date}\n"
+        date = created_at.split(" ")[0]
+
+        text += (
+            "━━━━━━━━━━━━━━\n"
+            f"🆔 #{transaction_id}\n\n"
+            f"{icon} {'Доход' if type_ == 'income' else 'Расход'}\n"
+            f"💰 {amount:,} ₽\n"
+            f"📅 {date}\n"
+        ).replace(",", " ")
 
     await message.answer(text)
